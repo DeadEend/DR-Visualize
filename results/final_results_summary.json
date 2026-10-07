@@ -1,0 +1,142 @@
+{
+    "project": "DR-Visualize",
+    "model": "EfficientNet-B0",
+    "model_file": "dr_visualize_best.keras",
+    "dataset": {
+        "name": "APTOS 2019 Blindness Detection",
+        "total_labeled_images": 3662,
+        "split_method": "Stratified train/validation/test split",
+        "random_seed": 42,
+        "train_images": 2563,
+        "validation_images": 549,
+        "test_images": 550
+    },
+    "test_results": {
+        "accuracy": 0.7781818181818182,
+        "accuracy_percentage": 77.81818181818181,
+        "macro_roc_auc": 0.9146495077393224
+    },
+    "classification_report": {
+        "No DR": {
+            "precision": 0.9629629629629629,
+            "recall": 0.959409594095941,
+            "f1-score": 0.9611829944547134,
+            "support": 271.0
+        },
+        "Mild DR": {
+            "precision": 0.5423728813559322,
+            "recall": 0.5714285714285714,
+            "f1-score": 0.5565217391304348,
+            "support": 56.0
+        },
+        "Moderate DR": {
+            "precision": 0.6519337016574586,
+            "recall": 0.7866666666666666,
+            "f1-score": 0.7129909365558912,
+            "support": 150.0
+        },
+        "Severe DR": {
+            "precision": 0.42857142857142855,
+            "recall": 0.41379310344827586,
+            "f1-score": 0.42105263157894735,
+            "support": 29.0
+        },
+        "Proliferative DR": {
+            "precision": 0.5,
+            "recall": 0.13636363636363635,
+            "f1-score": 0.21428571428571427,
+            "support": 44.0
+        },
+        "accuracy": 0.7781818181818182,
+        "macro avg": {
+            "precision": 0.6171681949095564,
+            "recall": 0.5735323144006182,
+            "f1-score": 0.5732068032011403,
+            "support": 550.0
+        },
+        "weighted avg": {
+            "precision": 0.7700990381747006,
+            "recall": 0.7781818181818182,
+            "f1-score": 0.7640609947568661,
+            "support": 550.0
+        }
+    },
+    "per_class_roc_auc": {
+        "No DR": 0.9896440899892869,
+        "Mild DR": 0.9013519375361481,
+        "Moderate DR": 0.9140000000000001,
+        "Severe DR": 0.8977430670461315,
+        "Proliferative DR": 0.8705084441250449
+    },
+    "confusion_matrix": [
+        [
+            260,
+            5,
+            6,
+            0,
+            0
+        ],
+        [
+            5,
+            32,
+            19,
+            0,
+            0
+        ],
+        [
+            4,
+            18,
+            118,
+            8,
+            2
+        ],
+        [
+            0,
+            1,
+            12,
+            12,
+            4
+        ],
+        [
+            1,
+            3,
+            26,
+            8,
+            6
+        ]
+    ],
+    "gradcam_samples": [
+        {
+            "image_id": "d9ad2a0ec026",
+            "true_class": "No DR"
+        },
+        {
+            "image_id": "01b3aed3ed4c",
+            "true_class": "Mild DR"
+        },
+        {
+            "image_id": "89ee1fa16f90",
+            "true_class": "Moderate DR"
+        },
+        {
+            "image_id": "8b76c3c5cb3e",
+            "true_class": "Severe DR"
+        },
+        {
+            "image_id": "3ac3fbfca7d4",
+            "true_class": "Proliferative DR"
+        }
+    ],
+    "result_files": {
+        "metrics": "final_test_metrics.csv",
+        "confusion_matrix": "confusion_matrix.png",
+        "roc_auc_curves": "roc_auc_curves.png",
+        "gradcam_directory": "gradcam_samples_final"
+    },
+    "notes": [
+        "Final model selected using validation performance before test evaluation.",
+        "Test set was kept untouched for final evaluation.",
+        "Grad-CAM explanations were generated using the final selected model.",
+        "Results represent a research prototype and not a clinical diagnostic system."
+    ]
+}
