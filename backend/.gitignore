@@ -1,0 +1,18 @@
+
+# Python environment and cache
+venv/
+__pycache__/
+*.py[cod]
+
+# Downloaded local model
+dr_visualize_best.keras
+
+# Temporary test images
+gradcam_overlay_test.png
+gradcam_overlay_result.png
+000c1434d8d7.png
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
