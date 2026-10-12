@@ -61,10 +61,10 @@ export default function Hero() {
 
                 {/* Retinal image mock */}
                 <div className="relative min-h-0 min-w-0 w-full overflow-hidden rounded-xl border border-slate-200 bg-[#d8dde4]" style={{ aspectRatio: '1/1' }}>
-                  <div className="absolute inset-[10%] rounded-full border-[10px] border-[#d5d9de] bg-[#b95743] shadow-inner" />
+                  <div className="absolute inset-[10%] rounded-full border-10 border-[#d5d9de] bg-[#b95743] shadow-inner" />
                   <div className="absolute left-[39%] top-[42%] h-16 w-16 rounded-full bg-[#d38b74] opacity-70 blur-xl" />
-                  <div className="absolute left-[19%] top-[33%] h-7 w-16 rotate-[28deg] rounded-full bg-[#8d2f2d] opacity-70 blur-md" />
-                  <div className="absolute right-[16%] top-[55%] h-6 w-14 -rotate-[30deg] rounded-full bg-[#8d2f2d] opacity-60 blur-md" />
+                  <div className="absolute left-[19%] top-[33%] h-7 w-16 rotate-28 rounded-full bg-[#8d2f2d] opacity-70 blur-md" />
+                  <div className="absolute right-[16%] top-[55%] h-6 w-14 rotate-[-30deg] rounded-full bg-[#8d2f2d] opacity-60 blur-md" />
                   <span className="absolute bottom-2.5 left-2.5 rounded-md bg-white/85 px-1.5 py-0.5 text-[9px] font-semibold text-slate-600">
                     Image preview
                   </span>
@@ -106,10 +106,10 @@ export default function Hero() {
                 className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-primary-100 bg-primary-50/60 px-3 py-2 text-[10px] font-medium text-primary-800 transition-colors hover:border-primary-200 hover:bg-primary-50"
               >
                 <span className="flex items-center gap-1.5">
-                  <Sparkles size={12} className="flex-shrink-0" />
+                  <Sparkles size={12} className="shrink-0" />
                   Upload an image to generate a real prediction and explanation.
                 </span>
-                <LinkIcon size={12} className="flex-shrink-0" />
+                <LinkIcon size={12} className="shrink-0" />
               </Link>
             </div>
           </div>

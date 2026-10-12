@@ -24,7 +24,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex items-start gap-2 border-t border-slate-200 pt-6 text-xs leading-relaxed text-slate-500">
-          <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-amber-600" />
+          <AlertCircle size={14} className="mt-0.5 shrink-0 text-amber-600" />
           <p>
             DR-Visualize is an experimental AI tool that has not been clinically validated. Its outputs are not medical diagnoses and should not be used independently for treatment decisions. Consult a qualified medical professional for clinical assessment.
           </p>

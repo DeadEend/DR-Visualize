@@ -1,8 +1,207 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-navy-50: #f0f4fa;
+  --color-navy-100: #d9e2f1;
+  --color-navy-200: #b3c6e3;
+  --color-navy-300: #8d9fd4;
+  --color-navy-400: #5e7bba;
+  --color-navy-500: #3a5a9e;
+  --color-navy-600: #2a4580;
+  --color-navy-700: #1e3361;
+  --color-navy-800: #0a2540;
+  --color-navy-900: #071a30;
+  --color-navy-950: #040f1e;
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1e40af;
+  --color-primary-800: #1e3a8a;
+  --color-primary-900: #172554;
+
+  --color-accent-50: #f0f9ff;
+  --color-accent-100: #e0f2fe;
+  --color-accent-200: #bae6fd;
+  --color-accent-300: #7dd3fc;
+  --color-accent-400: #38bdf8;
+  --color-accent-500: #0ea5e9;
+  --color-accent-600: #0284c7;
+  --color-accent-700: #0369a1;
+
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-fade-in-up: fadeInUp 0.6s ease-out;
+  --animate-slide-in-right: slideInRight 0.4s ease-out;
+  --animate-scale-in: scaleIn 0.3s ease-out;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-pulse-soft: pulseSoft 2s ease-in-out infinite;
+
+  --shadow-soft: 0 2px 8px rgba(10, 37, 64, 0.06);
+  --shadow-card: 0 4px 16px rgba(10, 37, 64, 0.08);
+  --shadow-card-hover: 0 8px 32px rgba(10, 37, 64, 0.12);
+  --shadow-glow: 0 0 24px rgba(29, 78, 216, 0.15);
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  @keyframes pulseSoft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-xl transition-all duration-200 hover:bg-primary-700 hover:shadow-glow focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary-600 disabled:hover:shadow-none;
+}
+
+@utility btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-navy-800 font-medium rounded-xl border border-navy-200 transition-all duration-200 hover:bg-navy-50 hover:border-navy-300 hover:shadow-soft focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 active:scale-[0.98];
+}
+
+@utility btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-navy-700 font-medium rounded-lg transition-all duration-200 hover:bg-navy-50 hover:text-navy-900 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-400;
+}
+
+@utility card {
+  @apply bg-white rounded-2xl border border-navy-100 shadow-card transition-all duration-300;
+}
+
+@utility card-hover {
+  @apply hover:shadow-card-hover hover:border-navy-200;
+}
+
+@utility section-label {
+  @apply inline-flex items-center gap-2 text-sm font-semibold text-primary-600 uppercase tracking-wider;
+}
+
+@utility prose-academic {
+  @apply text-navy-700 leading-relaxed;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(10, 37, 64, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 37, 64, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(
+    rgba(10, 37, 64, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+@utility shimmer-bg {
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s linear infinite;
+}
 
 @layer base {
   html {
@@ -42,63 +241,5 @@
       scroll-behavior: auto !important;
       transition-duration: 0.01ms !important;
     }
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white font-medium rounded-xl transition-all duration-200 hover:bg-primary-700 hover:shadow-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary-600 disabled:hover:shadow-none;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-navy-800 font-medium rounded-xl border border-navy-200 transition-all duration-200 hover:bg-navy-50 hover:border-navy-300 hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 active:scale-[0.98];
-  }
-
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-navy-700 font-medium rounded-lg transition-all duration-200 hover:bg-navy-50 hover:text-navy-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400;
-  }
-
-  .card {
-    @apply bg-white rounded-2xl border border-navy-100 shadow-card transition-all duration-300;
-  }
-
-  .card-hover {
-    @apply hover:shadow-card-hover hover:border-navy-200;
-  }
-
-  .section-label {
-    @apply inline-flex items-center gap-2 text-sm font-semibold text-primary-600 uppercase tracking-wider;
-  }
-
-  .prose-academic {
-    @apply text-navy-700 leading-relaxed;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgba(10, 37, 64, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(10, 37, 64, 0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  .bg-dots {
-    background-image: radial-gradient(rgba(10, 37, 64, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
-  .shimmer-bg {
-    background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
-    background-size: 1000px 100%;
-    animation: shimmer 2s linear infinite;
   }
 }

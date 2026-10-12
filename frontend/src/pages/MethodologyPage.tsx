@@ -50,7 +50,7 @@ export default function MethodologyPage() {
           {sections.map(({ icon: Icon, title, body }) => (
             <div key={title} className="card p-6 md:p-8">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
                   <Icon size={21} />
                 </div>
                 <div>
@@ -63,7 +63,7 @@ export default function MethodologyPage() {
         </div>
 
         <div className="mt-8 rounded-xl bg-error-50/60 border border-error-200 px-5 py-4 flex items-start gap-2.5">
-          <BarChart3 size={16} className="text-error-600 flex-shrink-0 mt-0.5" />
+          <BarChart3 size={16} className="text-error-600 shrink-0 mt-0.5" />
           <p className="text-xs text-navy-700 leading-relaxed">
             These figures are recorded evaluation results, not clinical validation. The model has not been approved for diagnostic use.
           </p>

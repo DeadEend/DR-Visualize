@@ -180,7 +180,7 @@ export default function AnalyzePage() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full py-12 md:py-16 px-6 flex flex-col items-center justify-center text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 rounded-2xl"
+                  className="w-full py-12 md:py-16 px-6 flex flex-col items-center justify-center text-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-400 rounded-2xl"
                   aria-label="Click to select an image file"
                 >
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-100 text-primary-600 mb-5">
@@ -198,7 +198,7 @@ export default function AnalyzePage() {
                 </button>
               ) : (
                 <div className="p-6 flex flex-col sm:flex-row items-center gap-6">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <img
                       src={previewUrl}
                       alt="Selected retinal fundus image preview"
@@ -250,14 +250,14 @@ export default function AnalyzePage() {
 
             {validationError && (
               <div className="mt-4 flex items-start gap-2.5 p-4 rounded-xl bg-error-50 border border-error-200 animate-fade-in">
-                <AlertCircle size={18} className="text-error-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle size={18} className="text-error-600 shrink-0 mt-0.5" />
                 <p className="text-sm text-error-700">{validationError}</p>
               </div>
             )}
 
             {apiError && status === 'error' && (
               <div className="mt-4 flex items-start gap-2.5 p-4 rounded-xl bg-error-50 border border-error-200 animate-fade-in">
-                <AlertCircle size={18} className="text-error-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle size={18} className="text-error-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-semibold text-error-700 mb-0.5">
                     Analysis Failed
@@ -306,7 +306,7 @@ export default function AnalyzePage() {
           <div className="animate-fade-in-up space-y-6">
             {mockMode && (
               <div className="rounded-xl bg-warning-50 border border-warning-200 px-4 py-3 flex items-center gap-2.5">
-                <AlertCircle size={18} className="text-warning-600 flex-shrink-0" />
+                <AlertCircle size={18} className="text-warning-600 shrink-0" />
                 <p className="text-sm text-warning-700 font-medium">
                   Showing sample data — this is not a real model prediction.
                 </p>
@@ -361,7 +361,7 @@ export default function AnalyzePage() {
                           >
                             {className}
                             {isPredicted && (
-                              <span className="ml-2 text-2xs font-bold uppercase tracking-wider text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded">
+                              <span className="ml-2 text-2xs font-bold uppercase tracking-wider text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded-sm">
                                 Predicted
                               </span>
                             )}
@@ -428,7 +428,7 @@ export default function AnalyzePage() {
               </div>
 
               <div className="mt-5 flex items-start gap-2.5 p-4 rounded-xl bg-primary-50/50 border border-primary-100">
-                <Info size={16} className="text-primary-600 flex-shrink-0 mt-0.5" />
+                <Info size={16} className="text-primary-600 shrink-0 mt-0.5" />
                 <p className="text-sm text-navy-600 leading-relaxed">
                   Warmer colours indicate image regions that influenced the model's prediction.
                   This visualization is an explanation aid and does not confirm that the
@@ -438,7 +438,7 @@ export default function AnalyzePage() {
             </div>
 
             <div className="rounded-xl bg-error-50/60 border border-error-200 px-5 py-4 flex items-start gap-2.5">
-              <AlertCircle size={16} className="text-error-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle size={16} className="text-error-600 shrink-0 mt-0.5" />
               <p className="text-xs text-navy-700 leading-relaxed">
                 DR-Visualize is an experimental AI tool that has not been clinically validated. Its outputs are not medical diagnoses and should not be used independently for treatment decisions. Consult a qualified medical professional for clinical assessment.
               </p>

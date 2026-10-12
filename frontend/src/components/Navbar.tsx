@@ -23,7 +23,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <Link to="/" className="flex items-center gap-3 rounded-lg text-navy-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600">
+        <Link to="/" className="flex items-center gap-3 rounded-lg text-navy-800 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-600">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-navy-800 text-white shadow-soft">
             <Eye size={19} strokeWidth={2.1} />
           </span>

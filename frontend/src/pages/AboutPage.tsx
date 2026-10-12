@@ -35,7 +35,7 @@ export default function AboutPage() {
           {cards.map(({ icon: Icon, title, body }) => (
             <div key={title} className="card p-6 md:p-8">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
                   <Icon size={21} />
                 </div>
                 <div>
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
         <div className="mt-8 flex flex-col gap-4">
           <div className="rounded-xl bg-error-50/60 border border-error-200 px-5 py-4 flex items-start gap-2.5">
-            <AlertCircle size={16} className="text-error-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle size={16} className="text-error-600 shrink-0 mt-0.5" />
             <p className="text-xs text-navy-700 leading-relaxed">
               DR-Visualize is an experimental AI tool that has not been clinically validated. Its outputs are not medical diagnoses and should not be used independently for treatment decisions. Consult a qualified medical professional for clinical assessment.
             </p>
