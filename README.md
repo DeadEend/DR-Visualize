@@ -190,7 +190,7 @@ If PowerShell blocks virtual-environment activation, follow the appropriate Pyth
 Start the backend:
 
 ```powershell
-python -m uvicorn main:app --reload
+python -m uvicorn main:app --app-dir backend --reload
 ```
 
 The API should be available at:
