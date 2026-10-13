@@ -293,6 +293,67 @@ The trained model is stored in `model/dr_visualize_best.keras`.
 - [ ] Final repository professionalization and documentation review
 - [ ] Final decision on publishing or deploying the application
 
+## External Evaluation: EyePACS
+
+### Overview
+
+The existing DR-Visualize EfficientNet-B0 model was evaluated on a reproducibly selected sample of 5,000 images from the EyePACS diabetic retinopathy dataset. The model was evaluated without retraining.
+
+This experiment provides an initial assessment of how the model performs on an external dataset rather than only on the APTOS 2019 dataset used during development.
+
+### Evaluation Methodology
+
+- **Dataset:** EyePACS diabetic retinopathy dataset.
+- **Sample size:** 5,000 images.
+- **Sampling:** Reproducible sampling using random seed 42, preserving the dataset's approximate natural class distribution.
+- **Model:** Existing DR-Visualize EfficientNet-B0 model.
+- **Retraining:** None.
+- **Preprocessing:** TensorFlow image decoding and resizing, followed by CLAHE contrast enhancement on the luminance channel.
+- **Input size:** 224 × 224 pixels.
+- **Classes:** No DR, Mild DR, Moderate DR, Severe DR, and Proliferative DR.
+
+### Aggregate Results
+
+| Metric | Result |
+|---|---:|
+| Accuracy | 65.48% |
+| Macro Precision | 29.85% |
+| Macro Recall | 25.78% |
+| Macro F1-score | 26.88% |
+| Weighted F1-score | 62.40% |
+| Macro ROC-AUC (One-vs-Rest) | 67.59% |
+
+### Per-Class Performance
+
+| DR Grade | Precision | Recall | F1-score | Support |
+|---|---:|---:|---:|---:|
+| No DR | 75.48% | 85.27% | 80.08% | 3,674 |
+| Mild DR | 6.17% | 5.75% | 5.95% | 348 |
+| Moderate DR | 23.31% | 12.35% | 16.15% | 753 |
+| Severe DR | 19.67% | 9.68% | 12.97% | 124 |
+| Proliferative DR | 24.62% | 15.84% | 19.28% | 101 |
+
+### Interpretation and Limitations
+
+The model achieved 65.48% accuracy on this EyePACS sample, but its performance was substantially weaker for the four diabetic retinopathy grades than for the No DR class. In particular, recall was low for Mild, Moderate, Severe, and Proliferative DR.
+
+The difference between accuracy and macro F1-score highlights why accuracy alone is insufficient for evaluating a class-imbalanced medical image classification task. The results indicate limited external generalization under the evaluated conditions and should not be interpreted as evidence of clinical readiness.
+
+This was a preliminary external evaluation on a 5,000-image sample, not a complete evaluation of the EyePACS dataset, a clinical validation study, or a comparison against ophthalmologist diagnoses. Preprocessing differences and dataset characteristics may also influence the results. Further investigation is required before drawing conclusions about clinical use.
+
+### Reproducibility and Result Files
+
+The following aggregate evaluation files are included in this repository:
+
+- `results/eyepacs_5000/eyepacs_5000_metrics_summary.csv` — aggregate metrics.
+- `results/eyepacs_5000/eyepacs_5000_classification_report.csv` — per-class precision, recall, F1-score, and support.
+- `results/eyepacs_5000/eyepacs_5000_confusion_matrix.csv` — confusion matrix.
+
+The per-image prediction file and sampling manifest are retained locally and are not included in the published aggregate results.
+
+**Important:** DR-Visualize is a research prototype for diabetic retinopathy classification and visualization. It is not a substitute for professional eye examination, diagnosis, or medical advice.
+
+
 ## Disclaimer
 
 DR-Visualize is an experimental academic project. It has not been clinically validated and is not intended to diagnose, prevent, monitor, or treat any medical condition. Consult a qualified healthcare professional for clinical assessment.
