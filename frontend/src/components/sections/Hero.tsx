@@ -44,7 +44,7 @@ export default function Hero() {
         </div>
 
         {/* ── Right: Analysis Preview card ── */}
-        <div className="animate-fade-in-up w-full" style={{ animationDelay: '0.12s' }}>
+        <div className="animate-fade-in-up w-full">
           {/* Outer chrome */}
           <div className="mx-auto w-full max-w-[480px] rounded-2xl border border-slate-200 bg-white p-2.5 shadow-card lg:max-w-full">
             {/* Inner panel */}
