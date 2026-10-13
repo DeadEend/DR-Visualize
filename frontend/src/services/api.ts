@@ -1,9 +1,11 @@
+
 import type { PredictionResponse } from '@/types';
 import { DR_CLASSES } from '@/types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 const MOCK_DELAY_MS = 1800;
 
 function generateMockGradCAM(): string {
@@ -25,6 +27,7 @@ function generateMockGradCAM(): string {
     <rect width="512" height="512" fill="url(#heatmap)"/>
     <rect width="512" height="512" fill="url(#hotspot2)"/>
   </svg>`;
+
   return btoa(svg);
 }
 
@@ -51,40 +54,70 @@ function validateResponse(data: unknown): PredictionResponse {
   if (!data || typeof data !== 'object') {
     throw new Error('Invalid response: expected an object');
   }
+
   const obj = data as Record<string, unknown>;
 
   if (typeof obj.predicted_class !== 'string') {
     throw new Error('Invalid response: missing or invalid predicted_class');
   }
+
   if (typeof obj.class_index !== 'number') {
     throw new Error('Invalid response: missing or invalid class_index');
   }
+
   if (typeof obj.confidence !== 'number') {
     throw new Error('Invalid response: missing or invalid confidence');
   }
+
   if (!obj.probabilities || typeof obj.probabilities !== 'object') {
     throw new Error('Invalid response: missing or invalid probabilities');
   }
+
   if (typeof obj.gradcam_overlay !== 'string') {
     throw new Error('Invalid response: missing or invalid gradcam_overlay');
   }
+
   if (typeof obj.gradcam_format !== 'string') {
     throw new Error('Invalid response: missing or invalid gradcam_format');
   }
 
   const probs = obj.probabilities as Record<string, unknown>;
+
   for (const cls of DR_CLASSES) {
     if (typeof probs[cls] !== 'number') {
-      throw new Error(`Invalid response: missing probability for class "${cls}"`);
+      throw new Error(
+        `Invalid response: missing probability for class "${cls}"`
+      );
     }
   }
 
   return obj as unknown as PredictionResponse;
 }
 
-export async function predictImage(file: File): Promise<PredictionResponse> {
+async function getErrorDetail(response: Response): Promise<string | undefined> {
+  try {
+    const errorData: unknown = await response.json();
+
+    if (
+      typeof errorData === 'object' &&
+      errorData !== null &&
+      'detail' in errorData &&
+      typeof errorData.detail === 'string'
+    ) {
+      return errorData.detail;
+    }
+  } catch {
+    // The response may not contain valid JSON.
+  }
+
+  return undefined;
+}
+
+export async function predictImage(
+  file: File
+): Promise<PredictionResponse> {
   if (USE_MOCK) {
-    await new Promise((r) => setTimeout(r, MOCK_DELAY_MS));
+    await new Promise((resolve) => setTimeout(resolve, MOCK_DELAY_MS));
     return getMockResponse();
   }
 
@@ -102,34 +135,66 @@ export async function predictImage(file: File): Promise<PredictionResponse> {
     });
 
     if (!response.ok) {
-      if (response.status === 400) {
-        throw new Error('The image could not be processed. Please try a different image.');
+      const detail = await getErrorDetail(response);
+
+      switch (response.status) {
+        case 400:
+          throw new Error(
+            detail ||
+              'The image could not be processed. Please upload a valid JPEG or PNG image.'
+          );
+
+        case 413:
+          throw new Error(
+            detail || 'The image exceeds the 10 MB upload limit.'
+          );
+
+        case 415:
+        case 422:
+          throw new Error(
+            detail ||
+              'The uploaded file format was not accepted. Please use JPEG or PNG.'
+          );
+
+        case 503:
+          throw new Error(
+            detail ||
+              'The analysis service is temporarily unavailable. Please try again shortly.'
+          );
+
+        default:
+          throw new Error(
+            detail ||
+              'An unexpected error occurred during analysis. Please try again.'
+          );
       }
-      if (response.status === 422) {
-        throw new Error('The uploaded file format was not accepted. Please use JPEG or PNG.');
-      }
-      if (response.status === 503) {
-        throw new Error('The analysis service is temporarily unavailable. Please try again shortly.');
-      }
-      throw new Error('An unexpected error occurred during analysis. Please try again.');
     }
 
-    const data = await response.json();
+    const data: unknown = await response.json();
     return validateResponse(data);
   } catch (err) {
     if (err instanceof DOMException && err.name === 'AbortError') {
-      throw new Error('The analysis timed out. The model may still be loading — please try again.');
+      throw new Error(
+        'The analysis timed out. The model may still be loading — please try again.'
+      );
     }
+
     if (err instanceof TypeError) {
-      throw new Error('Could not connect to the analysis service. Please verify the backend is running.');
+      throw new Error(
+        'Could not connect to the analysis service. Please verify the backend is running.'
+      );
     }
+
     throw err;
   } finally {
     clearTimeout(timeoutId);
   }
 }
 
-export function buildGradCamImageUrl(overlay: string, format: string): string {
+export function buildGradCamImageUrl(
+  overlay: string,
+  format: string
+): string {
   return `data:${format};base64,${overlay}`;
 }
 
