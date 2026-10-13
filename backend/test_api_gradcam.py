@@ -1,7 +1,9 @@
 import base64
 import requests
 
-image_path = "000c1434d8d7.png"
+from pathlib import Path
+
+image_path = Path(__file__).resolve().parent / "000c1434d8d7.png"
 
 with open(image_path, "rb") as image_file:
     response = requests.post(
