@@ -10,6 +10,8 @@ from PIL import Image
 from model_loader import load_model
 from gradcam import generate_gradcam, create_gradcam_overlay
 
+from image_validation import validate_and_decode_image
+
 
 app = FastAPI(title="DR-Visualize API")
 
@@ -86,16 +88,9 @@ async def predict(file: UploadFile = File(...)):
             detail="Model is not loaded",
         )
 
-    if file.content_type not in ["image/jpeg", "image/png"]:
-        raise HTTPException(
-            status_code=400,
-            detail="Please upload a JPEG or PNG image",
-        )
-
     try:
         contents = await file.read()
-        image = Image.open(io.BytesIO(contents)).convert("RGB")
-
+        image = validate_and_decode_image(contents, file.content_type)
         image_array = preprocess_image(image)
 
         probabilities = model.predict(
@@ -112,7 +107,7 @@ async def predict(file: UploadFile = File(...)):
             predicted_index,
         )
 
-        # Overlay the heatmap on the uploaded retinal image.
+        # Overlay the heatmap on the uploaded image.
         overlay = create_gradcam_overlay(image, heatmap)
 
         # Convert the overlay image into Base64 for the frontend.
