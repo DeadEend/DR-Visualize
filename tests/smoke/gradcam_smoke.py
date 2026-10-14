@@ -1,8 +1,14 @@
+from pathlib import Path
+import sys
+
 import numpy as np
-from model_loader import load_model
-from gradcam import generate_gradcam
 from PIL import Image
-from gradcam import create_gradcam_overlay
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT_DIR))
+
+from backend.model_loader import load_model
+from backend.gradcam import generate_gradcam, create_gradcam_overlay
 
 model = load_model()
 
@@ -12,13 +18,17 @@ class_index = int(np.argmax(predictions[0]))
 
 heatmap = generate_gradcam(model, image, class_index)
 
-print("Grad-CAM test completed!")
+print("Grad-CAM smoke test completed.")
 print("Predicted class index:", class_index)
 print("Heatmap shape:", heatmap.shape)
 print("Heatmap range:", float(heatmap.min()), float(heatmap.max()))
 
+artifacts_dir = ROOT_DIR / "tests" / "artifacts"
+artifacts_dir.mkdir(parents=True, exist_ok=True)
+
 test_image = Image.new("RGB", (224, 224), color="gray")
 overlay = create_gradcam_overlay(test_image, heatmap)
-overlay.save("gradcam_overlay_test.png")
+output_path = artifacts_dir / "gradcam_overlay_test.png"
+overlay.save(output_path)
 
-print("Overlay saved: gradcam_overlay_test.png")
+print("Overlay saved:", output_path)

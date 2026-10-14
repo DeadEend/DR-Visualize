@@ -27,3 +27,10 @@ Thumbs.db
 
 # TypeScript build artifacts
 *.tsbuildinfo
+
+# Generated test artifacts
+tests/artifacts/
+
+# Local per-image external evaluation data
+results/eyepacs_5000/eyepacs_5000_evaluation.csv
+results/eyepacs_5000/eyepacs_5000_manifest.csv
