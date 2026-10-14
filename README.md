@@ -432,12 +432,15 @@ and are not included in the published aggregate results.
 
 ## Future Scope
 
-Potential future work includes improving minority-class performance,
-evaluating additional external datasets, and conducting more rigorous
-calibration and robustness analyses. Retrieval-augmented generation
-(RAG) may also be investigated to provide supplementary educational
-context from carefully curated sources. **RAG is future scope only and
-is not implemented in the current project.**
+Future work may extend the DR-Visualize framework in the following areas:
+
+- **Retrieval-Augmented Generation (RAG):** Integrate RAG to provide literature-grounded educational explanations alongside model predictions and Grad-CAM visualizations. The system could retrieve relevant information from trusted ophthalmology literature and clinical resources, with appropriate source citations.
+- **Non-retinal Image Detection:** Develop and evaluate a dedicated mechanism to identify and reject non-retinal images before they are processed by the diabetic retinopathy classification model.
+- **External Validation:** Evaluate the model on additional retinal image datasets to investigate its generalization across different populations and imaging conditions.
+- **Model Performance:** Investigate methods to improve classification performance for underrepresented diabetic retinopathy severity classes.
+- **Robustness and Reliability:** Evaluate model calibration, image-quality sensitivity, and robustness under different imaging conditions.
+
+These are proposed future enhancements and are not implemented features of the current version. Any future clinical application would require appropriate validation and evaluation.
 
 ## Disclaimer
 
